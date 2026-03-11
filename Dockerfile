@@ -15,8 +15,8 @@ COPY --chown=node:node package*.json ./
 
 # Installation propre (sans devDependencies) + nettoyage cache
 RUN npm ci --omit=dev && npm cache clean --force
-RUN npm update "zlib:1.3.2-r0"
 
+RUN apk upgrade --no-cache
 
 # Copie du code source avec bonnes permissions
 COPY --chown=node:node . .
