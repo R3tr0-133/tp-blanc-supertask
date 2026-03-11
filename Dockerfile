@@ -2,6 +2,7 @@ FROM node:20-alpine
 
 ENV NODE_ENV=production
 
+RUN apk upgrade --no-cache
 # Passage immédiat en utilisateur non-root
 USER node
 
@@ -16,7 +17,6 @@ COPY --chown=node:node package*.json ./
 # Installation propre (sans devDependencies) + nettoyage cache
 RUN npm ci --omit=dev && npm cache clean --force
 
-RUN apk upgrade --no-cache
 
 # Copie du code source avec bonnes permissions
 COPY --chown=node:node . .
